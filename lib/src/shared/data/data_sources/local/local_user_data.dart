@@ -1,4 +1,4 @@
-List<Map<String, dynamic>> users = [
+List<Map<String, dynamic>> localUserData = [
   {
     'id': 'user_1',
     'username': 'User #1',

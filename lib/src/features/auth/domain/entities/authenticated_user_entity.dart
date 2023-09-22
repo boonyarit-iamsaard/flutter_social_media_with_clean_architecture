@@ -1,4 +1,4 @@
-import 'package:flutter_social_media_with_clean_architecture/src/shared/domain/entities/user.dart';
+import 'package:flutter_social_media_with_clean_architecture/src/shared/domain/entities/user_entity.dart';
 import 'package:formz/formz.dart';
 
 class AuthenticatedUserEntity extends UserEntity {
