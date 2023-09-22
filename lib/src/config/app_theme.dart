@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SocialMediaAppTheme {
+class AppTheme {
   ThemeData theme() {
     return ThemeData(
       scaffoldBackgroundColor: Colors.black87,

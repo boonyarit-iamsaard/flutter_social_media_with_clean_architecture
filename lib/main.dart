@@ -3,18 +3,18 @@ import 'package:flutter_social_media_with_clean_architecture/src/config/app_rout
 import 'package:flutter_social_media_with_clean_architecture/src/config/app_theme.dart';
 
 void main() {
-  runApp(const SocialMediaApp());
+  runApp(const App());
 }
 
-class SocialMediaApp extends StatelessWidget {
-  const SocialMediaApp({super.key});
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Social Media App with Clean Architecture',
-      theme: SocialMediaAppTheme().theme(),
+      theme: AppTheme().theme(),
       routerConfig: AppRouter().router,
     );
   }

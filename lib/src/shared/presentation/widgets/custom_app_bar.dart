@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
-        'Social Media App with Clean Architecture',
-        style: TextStyle(
-          fontSize: 14,
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18.0,
           fontWeight: FontWeight.bold,
         ),
       ),
