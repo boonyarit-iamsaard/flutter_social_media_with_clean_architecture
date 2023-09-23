@@ -60,7 +60,7 @@ class MockAuthDataSourceImpl implements MockAuthDataSource {
       () {
         return _cache.read<AuthenticatedUserEntity>(
                 key: authenticatedUserCacheKey) ??
-            AuthenticatedUserEntity.empty();
+            AuthenticatedUserEntity.empty;
       },
     );
   }
@@ -92,7 +92,7 @@ class MockAuthDataSourceImpl implements MockAuthDataSource {
     return Future.delayed(const Duration(seconds: 1), () {
       _cache.write<AuthenticatedUserEntity>(
         key: authenticatedUserCacheKey,
-        value: AuthenticatedUserEntity.empty(),
+        value: AuthenticatedUserEntity.empty,
       );
       _controller.add(AuthenticationStatus.unauthenticated);
     });
@@ -119,7 +119,7 @@ class MockAuthDataSourceImpl implements MockAuthDataSource {
     AuthenticatedUserEntity user = _cache.read<AuthenticatedUserEntity>(
           key: authenticatedUserCacheKey,
         ) ??
-        AuthenticatedUserEntity.empty();
+        AuthenticatedUserEntity.empty;
 
     _cache.write(
       key: authenticatedUserCacheKey,

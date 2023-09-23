@@ -13,11 +13,11 @@ class AuthenticatedUserEntity extends UserEntity {
 
   final Email? email;
 
-  static empty() => const AuthenticatedUserEntity(
-        id: 'user_0',
-        username: Username.pure(),
-        email: Email.pure(),
-      );
+  static const empty = AuthenticatedUserEntity(
+    id: 'user_0',
+    username: Username.pure(),
+    email: Email.pure(),
+  );
 
   @override
   List<Object?> get props => [
