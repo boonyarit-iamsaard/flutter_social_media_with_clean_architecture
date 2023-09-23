@@ -16,10 +16,10 @@ class UserEntity extends Equatable {
     this.imagePath,
   });
 
-  static empty() => const UserEntity(
-        id: 'user_0',
-        username: Username.pure(),
-      );
+  static const empty = UserEntity(
+    id: 'user_0',
+    username: Username.pure(),
+  );
 
   @override
   List<Object?> get props => [
