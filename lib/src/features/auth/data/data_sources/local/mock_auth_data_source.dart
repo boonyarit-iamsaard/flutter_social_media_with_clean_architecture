@@ -83,6 +83,8 @@ class MockAuthDataSourceImpl implements MockAuthDataSource {
             return;
           }
         }
+
+        throw LoginException.fromCode('user-not-found');
       },
     );
   }
@@ -148,6 +150,23 @@ class MockAuthDataSourceImpl implements MockAuthDataSource {
       imagePath: 'assets/images/image_3.jpg',
     ),
   ];
+}
+
+class LoginException implements Exception {
+  const LoginException(this.message);
+
+  final String message;
+
+  factory LoginException.fromCode(String code) {
+    switch (code) {
+      case 'user-not-found':
+        return const LoginException('User not found, please register.');
+      case 'invalid-credentials':
+        return const LoginException('Invalid username or password.');
+      default:
+        return const LoginException('An unknown error occurred.');
+    }
+  }
 }
 
 /// A simple cache client for storing key-value pairs.

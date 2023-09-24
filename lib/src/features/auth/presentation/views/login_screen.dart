@@ -13,7 +13,17 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Login'),
       body: BlocListener<LoginCubit, LoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state.submissionStatus == FormzSubmissionStatus.failure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  state.errorMessage ?? 'Authentication Failure',
+                ),
+              ),
+            );
+          }
+        },
         child: const SafeArea(
           child: Padding(
             padding: EdgeInsets.all(16.0),

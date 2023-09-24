@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_social_media_with_clean_architecture/src/features/auth/data/data_sources/local/mock_auth_data_source.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/entities/authenticated_user_entity.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/use_cases/login_use_case.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/shared/domain/entities/user_entity.dart';
@@ -58,6 +59,14 @@ class LoginCubit extends Cubit<LoginState> {
 
       emit(
         state.copyWith(submissionStatus: FormzSubmissionStatus.success),
+      );
+    } on LoginException catch (e) {
+      emit(
+        state.copyWith(
+          submissionStatus: FormzSubmissionStatus.failure,
+          validInputs: false,
+          errorMessage: e.message,
+        ),
       );
     } catch (e) {
       emit(
