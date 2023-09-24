@@ -16,4 +16,4 @@ class GetAuthenticationStatusEvent extends AuthEvent {
   List<Object> get props => [authenticationStatus];
 }
 
-class SignOutEvent extends AuthEvent {}
+class LogoutEvent extends AuthEvent {}

@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/data/data_sources/local/mock_auth_data_source.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/entities/authenticated_user_entity.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/use_cases/get_authenticated_user_use_case.dart';
-import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/use_cases/get_authention_status_use_case.dart';
+import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/use_cases/get_authentication_status_use_case.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/domain/use_cases/logout_use_case.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/shared/domain/use_cases/use_case.dart';
 
@@ -30,7 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _getAuthenticatedUserUseCase = getAuthenticatedUserUseCase,
         super(const AuthState.unknown()) {
     on<GetAuthenticationStatusEvent>(_onGetAuthenticationStatusEvent);
-    on<SignOutEvent>(_onSignOutEvent);
+    on<LogoutEvent>(_onLogoutEvent);
 
     _authenticationStatusSubscription =
         _getAuthenticationStatusUseCase(NoParams())
@@ -64,8 +64,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSignOutEvent(
-      SignOutEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onLogoutEvent(
+      LogoutEvent event, Emitter<AuthState> emit) async {
     debugPrint('AuthBloc: _onSignOutEvent');
 
     await _logoutUseCase(NoParams());
