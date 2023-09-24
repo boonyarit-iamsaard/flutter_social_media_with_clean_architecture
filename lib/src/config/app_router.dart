@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_social_media_with_clean_architecture/src/features/auth/data/data_sources/local/mock_auth_data_source.dart';
+import 'package:flutter_social_media_with_clean_architecture/src/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/presentation/views/login_screen.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/auth/presentation/views/register_screen.dart';
 import 'package:flutter_social_media_with_clean_architecture/src/features/feed/presentation/views/discover_screen.dart';
@@ -8,8 +10,9 @@ import 'package:flutter_social_media_with_clean_architecture/src/features/feed/p
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
-  // TODO: add auth bloc as an input parameter
-  AppRouter();
+  final AuthBloc authBloc;
+
+  AppRouter(this.authBloc);
 
   late GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -52,8 +55,32 @@ class AppRouter {
             ),
           ]),
     ],
-    // TODO: redirect to login if not authenticated
-    // redirect:
+    redirect: (
+      BuildContext context,
+      GoRouterState state,
+    ) {
+      final loginLocation = state.namedLocation('login');
+      final registerLocation = state.namedLocation('register');
+
+      final bool authenticated = authBloc.state.authenticationStatus ==
+          AuthenticationStatus.authenticated;
+
+      final bool isLoginOrRegister = state.matchedLocation == loginLocation ||
+          state.matchedLocation == registerLocation;
+
+      if (!authenticated && !isLoginOrRegister) {
+        return '/login';
+      }
+
+      if (authenticated && isLoginOrRegister) {
+        return '/';
+      }
+
+      return null;
+    },
+    refreshListenable: GoRouterRefreshStream(
+      authBloc.stream,
+    ),
   );
 }
 

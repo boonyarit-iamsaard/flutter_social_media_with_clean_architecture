@@ -51,12 +51,14 @@ class App extends StatelessWidget {
             ),
           ),
         ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'Social Media App with Clean Architecture',
-          theme: AppTheme().theme(),
-          routerConfig: AppRouter().router,
-        ),
+        child: Builder(builder: (context) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Social Media App with Clean Architecture',
+            theme: AppTheme().theme(),
+            routerConfig: AppRouter(context.read<AuthBloc>()).router,
+          );
+        }),
       ),
     );
   }
